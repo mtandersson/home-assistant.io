@@ -10,6 +10,7 @@ ha_codeowners:
   - '@mtandersson'
 ha_domain: abrp
 ha_platforms:
+  - device_tracker
   - sensor
 ha_integration_type: hub
 ha_quality_scale: bronze
@@ -87,6 +88,10 @@ The device card shows a human-friendly vehicle name when ABRP has a catalog matc
 - **State of health**: Estimated battery health percentage.
 - **Battery capacity**: Estimated usable battery capacity.
 
+### Device tracker
+
+- **Location**: The GPS position of your vehicle, so you can show it on a map or use it in zone-based automations. The tracker is added when ABRP first receives a position for the vehicle. If ABRP never receives a position, no tracker is added for that vehicle.
+
 ### Controls
 
 This is a read-only integration. It does not provide vehicle control actions like start charging, stop charging, climate control, or lock and unlock.
@@ -153,6 +158,8 @@ Telemetry is pushed from ABRP in near real time when ABRP receives vehicle updat
 
 Each sensor shows the newest value ABRP has for your vehicle. Some telemetry, like power and voltage, only changes while your vehicle is actively reporting, usually while driving or charging.
 
+The device tracker updates whenever ABRP receives a new position for your vehicle, usually while driving.
+
 Your ABRP garage list is read when the integration loads. Reload the integration after adding or renaming vehicles in ABRP. Removing a vehicle from ABRP does not automatically remove its device from Home Assistant.
 
 ## Known limitations
@@ -164,6 +171,10 @@ The integration is read-only and does not control your vehicle. To send commands
 ### Telemetry availability
 
 Data freshness depends on ABRP and your vehicle manufacturer data source. Some entities appear only after the first value is received.
+
+### Vehicle location
+
+For vehicles without a direct connection to ABRP, the position can come from the ABRP phone app. In that case, the device tracker shows your phone's location instead of the vehicle's. Heading, speed, and elevation are not provided.
 
 ### Route planning
 
